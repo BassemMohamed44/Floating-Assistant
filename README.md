@@ -4,7 +4,7 @@ A Windows desktop program that displays a floating circular button (similar to A
 
 ## Screenshot
 
-<img src="assets\Floating Assistant.png" alt="FA">
+<img src="Screenshot\Floating Assistant.png" alt="FA">
 
 ## Install
 
