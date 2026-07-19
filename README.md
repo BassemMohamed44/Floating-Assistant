@@ -1,4 +1,30 @@
-# Venom Floating Assistant
+<div align="center">
+  <img width="260" height="260" src="https://github.com/BassemMohamed44/assets/venom.png" alt="Venom Floating Assistant Icon"/>
+  <h1 align="center">Venom Floating Assistant  𝐕🕷️🕸️</h1>
+  <p align="center">A Windows desktop utility that shows a floating</p>
+</div>
+
+<div align="center">
+  <img src="https://img.shields.io/static/v1?label=Issues&message=0open&color=4C0099" alt="issues"/>
+  <img src="https://img.shields.io/static/v1?label=License&message=MIT&color=4C0099" alt="license"/>
+  <img src="https://img.shields.io/static/v1?label=Security&message=Learning_Resources&color=4C0099" alt="security"/>
+  <br>
+  <img src="https://img.shields.io/static/v1?label=Python&message=Projects&color=4C0099" alt="projects"/>
+  <img src="https://img.shields.io/static/v1?label=Venom&message=Floating-Assistant&color=4C0099" alt="projects"/>
+</div>
+<br>
+<div align="center">
+  
+  [![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white)](https://instagram.com/@bassemmohamed_0)
+  [![Reddit](https://img.shields.io/badge/Reddit-%23FF4500.svg?style=for-the-badge&logo=Reddit&logoColor=white)](https://reddit.com/user/00xBassem)
+  [![X](https://img.shields.io/badge/X-black.svg?style=for-the-badge&logo=X&logoColor=white)](https://x.com/@Basem2Mohamed)
+  
+</div>
+
+<p align="center">Made possible by <a href="https://bassemmohamed.pages.dev/"><strong>BassemMohamed</strong></a></p>
+
+
+
 
 A Windows desktop utility that shows a floating, draggable circular button (similar to iOS AssistiveTouch) that always stays on top of every window. Tap it to open a **Quick Panel** with fast controls for Wi-Fi, Bluetooth, volume, brightness, microphone, screenshots, and common system actions — plus your own custom app shortcuts.
 
