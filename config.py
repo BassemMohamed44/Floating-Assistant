@@ -1,0 +1,142 @@
+import os
+import sys
+
+if getattr(sys, "frozen", False):
+    BASE_DIR = os.path.dirname(sys.executable)
+else:
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+ASSETS_DIR = os.path.join(BASE_DIR, "assets")
+DATA_DIR = os.path.join(BASE_DIR, "data")
+SETTINGS_FILE = os.path.join(DATA_DIR, "settings.json")
+
+APP_NAME = "FloatingAssistant"
+APP_VERSION = "1.0.0"
+DEFAULT_SETTINGS = {
+    "button_size": 60,           
+    "button_color": "#3B8ED0",     
+    "button_opacity": 0.9,
+    "animation_speed": 0.15,       
+    "language": "ar",              
+    "theme": "dark",               
+    "run_on_startup": False,       
+    "position_x": 100,            
+    "position_y": 100,            
+    "hotkey_toggle_menu": "ctrl+alt+w",
+    "hotkey_screenshot": "ctrl+alt+s",
+    "screenshot_save_path": os.path.join(os.path.expanduser("~"), "Pictures", "Screenshots"),
+    "custom_apps": [],
+}
+
+
+TRANSLATIONS = {
+    "ar": {
+        "wifi": "Wi-Fi",
+        "bluetooth": "بلوتوث",
+        "volume": "الصوت",
+        "microphone": "المايكروفون",
+        "brightness": "السطوع",
+        "night_light": "الإضاءة الليلية",
+        "screenshot": "لقطة شاشة",
+        "task_manager": "مدير المهام",
+        "file_explorer": "مستكشف الملفات",
+        "settings": "الإعدادات",
+        "lock_pc": "قفل الجهاز",
+        "sign_out": "تسجيل الخروج",
+        "restart": "إعادة تشغيل",
+        "shutdown": "إيقاف التشغيل",
+        "sleep": "سكون",
+        "settings_title": "الإعدادات",
+        "button_size": "حجم الزر",
+        "button_color": "لون الزر",
+        "button_opacity": "شفافية الزر",
+        "animation_speed": "سرعة الأنيميشن",
+        "language": "اللغة",
+        "run_on_startup": "تشغيل مع بدء ويندوز",
+        "reset_settings": "إعادة تعيين الإعدادات",
+        "export_settings": "تصدير الإعدادات",
+        "import_settings": "استيراد الإعدادات",
+        "save": "حفظ",
+        "cancel": "إلغاء",
+        "confirm_shutdown": "هل أنت متأكد أنك تريد إيقاف تشغيل الجهاز؟",
+        "confirm_restart": "هل أنت متأكد أنك تريد إعادة تشغيل الجهاز؟",
+        "confirm_signout": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
+        "yes": "نعم",
+        "no": "لا",
+        "wifi_enabled": "تم تشغيل الواي فاي",
+        "wifi_disabled": "تم إيقاف الواي فاي",
+        "bluetooth_enabled": "تم تشغيل البلوتوث",
+        "bluetooth_disabled": "تم إيقاف البلوتوث",
+        "screenshot_saved": "تم حفظ لقطة الشاشة",
+        "mic_muted": "تم كتم المايكروفون",
+        "mic_unmuted": "تم تفعيل المايكروفون",
+        "volume_muted": "تم كتم الصوت",
+        "volume_unmuted": "تم تفعيل الصوت",
+        "night_light_enabled": "تم تشغيل الإضاءة الليلية",
+        "night_light_disabled": "تم إيقاف الإضاءة الليلية",
+        "add_app": "إضافة برنامج",
+        "app_name_prompt": "اسم البرنامج اللي هيظهر في اللوحة:",
+        "remove_app": "حذف برنامج",
+        "remove_app_confirm": "هل تريد حذف",
+        "app_launch_failed": "تعذر فتح البرنامج",
+        "manage_apps": "إدارة البرامج المضافة",
+        "no_apps_added": "لسه مفيش برامج مضافة",
+    },
+    "en": {
+        "wifi": "Wi-Fi",
+        "bluetooth": "Bluetooth",
+        "volume": "Volume",
+        "microphone": "Microphone",
+        "brightness": "Brightness",
+        "night_light": "Night Light",
+        "screenshot": "Screenshot",
+        "task_manager": "Task Manager",
+        "file_explorer": "File Explorer",
+        "settings": "Settings",
+        "lock_pc": "Lock PC",
+        "sign_out": "Sign Out",
+        "restart": "Restart",
+        "shutdown": "Shutdown",
+        "sleep": "Sleep",
+        "settings_title": "Settings",
+        "button_size": "Button Size",
+        "button_color": "Button Color",
+        "button_opacity": "Button Opacity",
+        "animation_speed": "Animation Speed",
+        "language": "Language",
+        "run_on_startup": "Run on Windows Startup",
+        "reset_settings": "Reset Settings",
+        "export_settings": "Export Settings",
+        "import_settings": "Import Settings",
+        "save": "Save",
+        "cancel": "Cancel",
+        "confirm_shutdown": "Are you sure you want to shut down?",
+        "confirm_restart": "Are you sure you want to restart?",
+        "confirm_signout": "Are you sure you want to sign out?",
+        "yes": "Yes",
+        "no": "No",
+        "wifi_enabled": "Wi-Fi Enabled",
+        "wifi_disabled": "Wi-Fi Disabled",
+        "bluetooth_enabled": "Bluetooth Enabled",
+        "bluetooth_disabled": "Bluetooth Disabled",
+        "screenshot_saved": "Screenshot Saved",
+        "mic_muted": "Microphone Muted",
+        "mic_unmuted": "Microphone Unmuted",
+        "volume_muted": "Volume Muted",
+        "volume_unmuted": "Volume Unmuted",
+        "night_light_enabled": "Night Light Enabled",
+        "night_light_disabled": "Night Light Disabled",
+        "add_app": "Add App",
+        "app_name_prompt": "Name to show on the panel:",
+        "remove_app": "Remove App",
+        "remove_app_confirm": "Remove",
+        "app_launch_failed": "Failed to launch app",
+        "manage_apps": "Manage Added Apps",
+        "no_apps_added": "No apps added yet",
+    },
+}
+
+
+def tr(key: str, language: str) -> str:
+    lang_dict = TRANSLATIONS.get(language, TRANSLATIONS["en"])
+    return lang_dict.get(key, TRANSLATIONS["en"].get(key, key))

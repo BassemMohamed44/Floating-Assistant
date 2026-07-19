@@ -1,82 +1,102 @@
 # Floating Assistant
 
-A Windows desktop program that displays a floating circular button (similar to AssistiveTouch) that always remains above all windows, is draggable, and opens a quick control menu for Wi-Fi, Bluetooth, sound, brightness, screenshots, and system actions.
+A Windows desktop utility that shows a floating, draggable circular button (similar to iOS AssistiveTouch) that always stays on top of every window. Tap it to open a **Quick Panel** with fast controls for Wi-Fi, Bluetooth, volume, brightness, microphone, screenshots, and common system actions — plus your own custom app shortcuts.
 
-## Screenshot
+برنامج سطح مكتب لويندوز بيظهر زرار دائري عائم (زي AssistiveTouch بتاع الآيفون) فوق كل النوافذ. تدوس عليه يفتحلك **Quick Panel** فيه تحكم سريع في الواي فاي، البلوتوث، الصوت، السطوع، الميكروفون، لقطة شاشة، وإجراءات النظام — وكمان تقدر تضيف اختصارات لبرامجك الخاصة.
 
-<img src="Screenshot\Floating Assistant.png" alt="FA">
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Platform](https://img.shields.io/badge/platform-Windows%2010%2F11-informational)
+![Python](https://img.shields.io/badge/python-3.10%2B-blue)
 
-## Install
+---
 
-The program requires **Windows 10/11** و **Python 3.10+**.
+## ✨ Features
+
+- **Floating button** that remembers its position, size, color, and opacity (`data/settings.json`).
+- **Quick Panel** with:
+  - Wi-Fi / Bluetooth / Microphone toggles (live status, instant feedback).
+  - Night Light shortcut.
+  - Volume & Brightness sliders with live percentage.
+  - Screenshot, Task Manager, File Explorer, Settings.
+  - Lock PC, Restart, Shutdown, Sleep (with confirmation for destructive actions).
+  - **Custom Apps**: add any program on your PC as a quick-launch tile — no code editing required. Tap ➕ to add, tap ✎ (edit mode) then ✕ to remove, or right-click a tile to remove it directly.
+- **Settings window**: button size/color/opacity, animation speed, language (Arabic/English), dark/light theme, run on Windows startup, manage/remove custom apps, reset to defaults.
+- **Global hotkeys**:
+  - `Ctrl+Alt+W` → toggle the Quick Panel.
+  - `Ctrl+Alt+S` → instant screenshot.
+- **Windows toast notifications** for every action (Wi-Fi on/off, screenshot saved, etc.).
+- All slow operations (radio state, PowerShell/WinRT calls, launching apps) run on background threads so the UI never freezes.
+
+## 🛠 Requirements
+
+- **Windows 10 or 11** (this project relies on Windows-only APIs: WinRT Radios, `pycaw`, `pywin32`).
+- **Python 3.10+**
 
 ```bash
 pip install -r requirements.txt
 ```
 
-> Note: Some libraries (`pycaw`, `comtypes`, `pywin32`, `win10toast`, `keyboard`)
-> It only works on Windows and will not install or work on other systems.
+> `pycaw`, `comtypes`, `pywin32`, `win10toast`, `keyboard`, and the `winrt-*` packages only work on Windows and will not install/run on macOS or Linux.
 
-## Run
+## ▶️ Run
 
 ```bash
 python main.py
 ```
 
-Upon first launch, a blue circular button will appear in the top corner of the screen. Drag it anywhere, and then press it once (without dragging) to bring up the quick control menu.
+On first launch a blue circular button appears near the top of the screen. Drag it anywhere; a plain click (no drag) opens the Quick Panel.
 
-## Features
-
-- A floating, retractable button that automatically saves its position in `data/settings.json`.
-- Quick control menu: Wi-Fi، Bluetooth، Volume، Microphone، Brightness، Night Light،
-  Screenshot، Task Manager، File Explorer، Settings، Lock، Sign Out، Restart،
-  Shutdown، Sleep.
-- Full settings window: Button size/color/transparency, animation speed, language (Arabic/English),
-  Dark/Light mode, Start with Windows startup, Reset, Export/Import settings.
-- General keyboard shortcuts:
-  - `Ctrl+Alt+W` To open/close the menu.
-  - `Ctrl+Alt+S` To capture an instant screenshot.
-- Windows Toast notifications for every operation (Wi-Fi on/off, saving a screenshot, ...).
-- All time-consuming operations (network scanning, PowerShell) run in separate threads to prevent the interface from freezing..
-
-## Project Structure
+## 📁 Project Structure
 
 ```
-project/
-├── main.py                  # Main operating point
-├── config.py                 # General settings and translations
+Floating Assistant/
+├── main.py                   # Entry point
+├── config.py                  # Default settings + translations (ar/en)
 ├── requirements.txt
-├── assets/                   # Icons and images (Optional: Place icon.ico here)
+├── assets/                    # Icons / images
 ├── ui/
-│   ├── floating_button.py    # Floating button
-│   ├── popup_menu.py         # pop-up menu
-│   └── settings_window.py    # Settings window
+│   ├── floating_button.py     # The draggable floating button
+│   ├── popup_menu.py          # Quick Panel (toggles, sliders, action tiles, custom apps)
+│   └── settings_window.py     # Settings window
 ├── core/
-│   ├── wifi.py
-│   ├── bluetooth.py
-│   ├── brightness.py         # It also includes NightLightController
-│   ├── volume.py             # VolumeController + MicrophoneController
+│   ├── wifi.py                 # Wi-Fi radio control (WinRT Radios API)
+│   ├── bluetooth.py            # Bluetooth radio control (WinRT Radios API)
+│   ├── brightness.py           # BrightnessController + NightLightController
+│   ├── volume.py                # VolumeController + MicrophoneController (pycaw)
 │   ├── screenshot.py
 │   ├── notifications.py
-│   ├── system_actions.py     # Lock / Sign Out / Restart / Shutdown / Sleep
-│   └── shortcuts.py          # ShortcutManager (Global Hotkeys)
+│   ├── system_actions.py       # Lock / Restart / Shutdown / Sleep / generic app launcher
+│   └── shortcuts.py            # Global hotkeys (ShortcutManager)
 ├── utils/
-│   ├── storage.py            # Save/Load Settings JSON
-│   ├── animations.py         # animation Fade in/out
-│   └── startup.py            # Run with Windows startup via Registry
+│   ├── storage.py               # Load/save settings.json
+│   ├── animations.py            # Fade in/out animations
+│   └── startup.py               # Run on Windows startup (registry)
 └── data/
-    └── settings.json
+    └── settings.json            # Local, user-specific — not tracked in git
 ```
 
-## Technical Notes
+## 🧩 How Wi-Fi / Bluetooth control works
 
-- **Bluetooth**: Windows does not provide a direct, official API for full Bluetooth control from applications.
-  Desktop: `Enable-PNPDevice` / `Disable-PNPDevice` via PowerShell is used as the best available solution; if sufficient powers are not available, the Bluetooth settings page will automatically open as an alternative plan.
-- **Night Light**: There is no stable official API for programmatically activated across Windows versions, 
-  so its settings page opens directly to ensure reliability.
-- to activate **Start with Windows startup**،The program adds a value in
-  `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run`، This does not require administrator privileges.
-- To create a file `.exe` Distributable, can be used `pyinstaller`:
-  ```bash
-  pyinstaller --noconsole --onefile --add-data "assets;assets" main.py
-  ```
+Older versions of this project disabled the network adapter / Bluetooth device entirely (`netsh admin=disable`, `Disable-PnpDevice`), which also removed the icon from the taskbar. The current implementation uses the **Windows Radio Management API** (`Windows.Devices.Radios`) via the in-process `winrt` Python bindings — the same API Action Center's own toggle uses. This only turns the radio on/off, so the device (and its taskbar icon) always stays present, and toggling is fast since no external process is spawned per click.
+
+## 🔒 Adding your own apps
+
+The Quick Panel no longer hardcodes any personal file paths. Use the **➕ Add App** tile to browse for an `.exe`, give it a name, and it's saved to `data/settings.json` under `custom_apps`. Remove an app via edit mode (✎ → ✕), right-click on the tile, or the "Manage Added Apps" section in Settings.
+
+## 📦 Building a distributable `.exe`
+
+```bash
+pyinstaller --noconsole --onefile --add-data "assets;assets" main.py
+```
+
+## 🤝 Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) and please follow the [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+
+## 🛡 Security
+
+See [SECURITY.md](SECURITY.md) for how to report a vulnerability.
+
+## 📄 License
+
+Licensed under the [MIT License](LICENSE).
