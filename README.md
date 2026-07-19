@@ -1,5 +1,5 @@
 <div align="center">
-  <img width="260" height="260" src="https://github.com/BassemMohamed44/assets/venom.png" alt="Venom Floating Assistant Icon"/>
+  <img width="260" height="260" src="assets/venom.png" alt="Venom Floating Assistant Icon"/>
   <h1 align="center">Venom Floating Assistant  𝐕🕷️🕸️</h1>
   <p align="center">A Windows desktop utility that shows a floating</p>
 </div>
