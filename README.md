@@ -110,7 +110,7 @@ The Quick Panel no longer hardcodes any personal file paths. Use the **➕ Add A
 ## Building a distributable `.exe`
 
 ```bash
-pyinstaller --noconsole --onefile --add-data "assets;assets" main.py
+pyinstaller --noconsole --onefile --add-data --icon=venom8.ico main.py
 ```
 
 ## Contributing
